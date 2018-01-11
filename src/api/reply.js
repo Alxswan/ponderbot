@@ -3,6 +3,7 @@ const unique = require('unique-random-array')
 const config = require('../config')
 const questions = require('../questions')
 const rando = require('../rando')
+const emojis = require('../emojis')
 
 const param = config.twitterConfig
 const randomReply = unique(param.randomReply.split('|'))
@@ -32,13 +33,14 @@ const reply = event => {
     return
   }
   const reply = randomReply()
+  const question = rando(questions)
+  const emoji = rando(emojis)
 
   const response = reply.replace('${screenName}', screenName)
+    .replace('${question}', question)
+    .replace('${emoji}', emoji)
 
-  const question = rando(questions)
-  const res = response.replace('${question}', question)
-
-  tweetNow(res)
+  tweetNow(response)
 }
 
 module.exports = reply
