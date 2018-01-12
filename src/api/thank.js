@@ -32,6 +32,8 @@ const thank = event => {
   if (Math.floor(Math.random() * 11) <= 9) {
     let screenName = event.user.screen_name
 
+    console.lol(event)
+
     if (screenName === config.twitterConfig.username || !isReply(event)) {
       return
     }
